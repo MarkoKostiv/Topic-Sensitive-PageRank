@@ -36,20 +36,6 @@ def parse_file(inlink, topic):
             else:
                 outlink_dict[q] = 1
 
-def cal_pagerank():
-    len_dic = float(len(inlink_dict.keys()))
-    ite = 0
-
-    while(ite < 100):
-        print(ite)
-        for page in PRank.keys():
-            new_PRank[page] = float(1 - d) / len_dic
-            for q in inlink_dict[page]:
-                new_PRank[page] = new_PRank[page] + (d * float(PRank.get(q)) / float(outlink_dict.get(q)))
-        for page in new_PRank.keys():
-            PRank[page] = new_PRank.get(page)
-        ite = ite + 1
-
 def cal_topic_sensitive_pagerank():
     len_dic = float(len(inlink_dict.keys()))
     ite = 0
@@ -73,11 +59,8 @@ def top_rank():
         print (SortedPR[i])
 
 if __name__ == "__main__":
-    # if len(sys.argv) == 2:
         inlink = 'wt2g_inlinks.txt'
         topic = 'wt2g_example_topic.txt'
         parse_file(inlink, topic)
         cal_topic_sensitive_pagerank()
         top_rank()
-    # else:
-        print("Enter the inlink file for which page link should be calculated")
